@@ -61,7 +61,7 @@ const WeatherCard = () => {
           <div className='wcc__temp'>
             {TEMP[tempUnit]}&deg;{tempUnit}
           </div>
-          <div class={`switch ${tempUnit === 'C' ? 'toggle' : 'toggle-on'}`} onClick={onTemperatureToggle}>
+          <div className={`switch ${tempUnit === 'C' ? 'toggle' : 'toggle-on'}`} onClick={onTemperatureToggle}>
             <span></span>
             <span>{tempUnit === 'C' ? 'C' : 'F'}</span>
           </div>
