@@ -1,0 +1,15 @@
+.navbar-container {
+  position: absolute;
+  .nc__item {
+    margin: 20px;
+    color: white;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 500px;
+    text-decoration: none;
+    text-shadow: 0cap;
+    &:hover {
+      color: pink;
+    }
+  }
+}

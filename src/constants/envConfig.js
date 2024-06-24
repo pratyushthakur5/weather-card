@@ -1,0 +1,4 @@
+export const API_KEY = process.env.NEXT_PUBLIC_API_KEY
+export const GEOCODING_API_URL = process.env.NEXT_PUBLIC_GEOCODING_API_URL
+export const CURRENT_WEATHER_API_URL = process.env.NEXT_PUBLIC_CURRENT_WEATHER_API_URL
+export const FORECAST_API_URL = process.env.NEXT_PUBLIC_FORECAST_API_URL

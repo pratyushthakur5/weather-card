@@ -1,0 +1,33 @@
+.search-bar-container {
+  position: relative;
+  z-index: 2;
+  .sbc__input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+  }
+  .sbc__text {
+    width: 80%;
+    padding: 4px;
+    border-radius: 20px;
+  }
+  .sbc__icon {
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .sbc__dropdown {
+    border: 1px solid lightblue;
+    border-radius: 20px;
+    position: absolute;
+    width: 100%;
+    // background: blue;
+    backdrop-filter: blur(1rem);
+    .sbc__dd__item {
+      padding: 8px 4px;
+      cursor: pointer;
+    }
+  }
+}

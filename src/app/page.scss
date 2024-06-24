@@ -1,0 +1,62 @@
+#root {
+  // background-color: #13143c;
+  body {
+    margin: 0px;
+  }
+  #main-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+
+    .mc__bg {
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+
+    .mc__search {
+      color: white;
+      font-style: unset;
+      width: 60px;
+    }
+
+    /* CSS */
+    .button-1 {
+      width: 100px;
+      background-color: #ea4c89;
+      border-radius: 8px;
+      border-style: none;
+      box-sizing: border-box;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      height: 40px;
+      line-height: 20px;
+      outline: none;
+      padding: 10px 16px;
+    }
+
+    .button-1:hover,
+    .button-1:focus {
+      background-color: #f082ac;
+    }
+
+    .mc__text {
+      position: absolute;
+      left: 5%;
+      top: 34%;
+      font-size: 20px;
+      line-height: 26px;
+    }
+  }
+}
+
+body {
+  margin: 0px;
+}
