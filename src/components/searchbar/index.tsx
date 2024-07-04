@@ -4,14 +4,21 @@ import { debounce } from '@/utils/index'
 import { NO_OF_SEARCH_ITEMS, WAIT_TIME } from '@/constants/global'
 import SearchBarImg from '@/assets/search.png'
 import './index.scss'
-const Searchbar = (props) => {
-  const { setLatLong, setLoading, setError } = props || {}
-  const [inputValue, setInputValue] = useState('')
-  const [dropdownData, setDropdownData] = useState([])
-  const [isDropdownActive, setIsDropdownActive] = useState(false)
 
-  const handleInputChange = (e) => {
-    const valueToBeSearched = e.target.value
+interface SearchbarProps {
+  setLatLong: (latLong: [string, string]) => void
+  setLoading: (loading: boolean) => void
+  setError: (error: boolean) => void
+}
+
+const Searchbar: React.FC<SearchbarProps> = (props) => {
+  const { setLatLong, setLoading, setError } = props || {}
+  const [inputValue, setInputValue] = useState<string>('')
+  const [dropdownData, setDropdownData] = useState<any[]>([])
+  const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valueToBeSearched: string = e.target.value
     setInputValue(valueToBeSearched)
     if (valueToBeSearched) {
       debouncedFetch(valueToBeSearched)
@@ -21,10 +28,10 @@ const Searchbar = (props) => {
     }
   }
 
-  const handleSearch = (valueToBeSearched) => {
+  const handleSearch = (valueToBeSearched: string) => {
     setLoading(true)
     getSearchListData(valueToBeSearched, NO_OF_SEARCH_ITEMS)
-      .then((res) => {
+      .then((res: any) => {
         setLoading(false)
         setError(false)
         setIsDropdownActive(true)
@@ -33,7 +40,7 @@ const Searchbar = (props) => {
           setError(true)
         }
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log(err)
         setLoading(false)
         setError(true)
@@ -42,7 +49,7 @@ const Searchbar = (props) => {
 
   const debouncedFetch = useMemo(() => debounce(handleSearch, WAIT_TIME), [])
 
-  const onDropdownClick = (e) => {
+  const onDropdownClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const item = e.target.dataset
     const lat = item.lat
     const lon = item.lon
@@ -76,24 +83,22 @@ const Searchbar = (props) => {
         ></img>
       </div>
 
-      <div id='x'>
-        {isDropdownActive && dropdownData?.length ? (
-          <div className='sbc__dropdown' onClick={onDropdownClick}>
-            {dropdownData.map((item) => {
-              return (
-                <div
-                  className='sbc__dd__item'
-                  data-lat={item.lat}
-                  data-lon={item.lon}
-                  key={`${item.name}-${item.lat}-${item.lon}`}
-                >
-                  {`${item.name},${item.state ? item.state + ',' : ''}${item.country}`}
-                </div>
-              )
-            })}
-          </div>
-        ) : null}
-      </div>
+      {isDropdownActive && dropdownData?.length ? (
+        <div className='sbc__dropdown' onClick={onDropdownClick}>
+          {dropdownData.map((item) => {
+            return (
+              <div
+                className='sbc__dd__item'
+                data-lat={item.lat}
+                data-lon={item.lon}
+                key={`${item.name}-${item.lat}-${item.lon}`}
+              >
+                {`${item.name},${item.state ? item.state + ',' : ''}${item.country}`}
+              </div>
+            )
+          })}
+        </div>
+      ) : null}
     </div>
   )
 }

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { NAVBAR_CONFIG } from './constants'
 import Link from 'next/link'
 import './index.scss'
 
-const Navbar = () => {
+interface NavbarProps {}
+
+const Navbar: FC<NavbarProps> = () => {
   return (
     <div className='navbar-container'>
       {NAVBAR_CONFIG.map((item) => {

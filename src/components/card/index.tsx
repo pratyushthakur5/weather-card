@@ -4,10 +4,22 @@ import Searchbar from '@/components/searchbar'
 import './index.scss'
 import { getCityWeather } from '@/actions/api'
 
-const WeatherCard = () => {
-  const [latLong, setLatLong] = useState([null, null])
-  const [cityData, setCityData] = useState()
-  const [tempUnit, setTempUnit] = useState('C')
+interface WeatherData {
+  name: string
+  weather: {
+    main: string
+    description: string
+    icon: string
+  }[]
+  main: {
+    temp: number
+  }
+}
+
+const WeatherCard: React.FC = () => {
+  const [latLong, setLatLong] = useState<[number | null, number | null]>([null, null])
+  const [cityData, setCityData] = useState<WeatherData | undefined>()
+  const [tempUnit, setTempUnit] = useState<'C' | 'F'>('C')
 
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -20,7 +32,7 @@ const WeatherCard = () => {
     if (lat && lon) {
       setLoading(true)
       getCityWeather(lat, lon)
-        .then((res) => {
+        .then((res: WeatherData) => {
           console.log(res)
           setCityData(res)
           setLoading(false)
@@ -34,19 +46,19 @@ const WeatherCard = () => {
     }
   }, latLong)
 
-  const convertToFahren = (temp) => {
+  const convertToFahren = (temp: number): number => {
     return Math.round(parseFloat(temp) * 1.8 + 32)
   }
-  const onTemperatureToggle = () => {
+  const onTemperatureToggle = (): void => {
     setTempUnit((curr) => {
       return curr === 'C' ? 'F' : 'C'
     })
   }
 
-  const renderCardData = (data) => {
+  const renderCardData = (data: WeatherData | undefined): JSX.Element => {
     const { name } = data || {}
-    const { main, description, icon } = data.weather[0] || []
-    const { temp } = data.main || {}
+    const { main, description, icon } = data?.weather[0] || []
+    const { temp } = data?.main || {}
 
     const TEMP = {
       C: temp,

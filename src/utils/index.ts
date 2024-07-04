@@ -1,6 +1,6 @@
-export const debounce = (cb, delay = 1000) => {
-  let timeout
-  return function (...args) {
+export const debounce = (cb: Function, delay: number = 1000): Function => {
+  let timeout: NodeJS.Timeout
+  return function (...args: any[]): void {
     clearTimeout(timeout)
     const context = this
     timeout = setTimeout(() => {
@@ -9,16 +9,14 @@ export const debounce = (cb, delay = 1000) => {
   }
 }
 
-export function timestampGenerator(ttl) {
+export function timestampGenerator(ttl: number): number | undefined {
   if (typeof ttl === 'number' && !Number.isNaN(ttl)) {
     return Date.now() + ttl * 1000
   }
 }
 
-function setLocalStorageItemWithExpiry(key, value, ttl = null) {
+function setLocalStorageItemWithExpiry(key: string, value: any, ttl: number | null = null): void {
   try {
-    // `item` is an object which contains the original value
-    // as well as the time when it's supposed to expire
     const item = {
       value: value,
       expiry: timestampGenerator(ttl),
@@ -29,19 +27,15 @@ function setLocalStorageItemWithExpiry(key, value, ttl = null) {
   }
 }
 
-function getLocalStorageItemWithExpiry(key) {
+function getLocalStorageItemWithExpiry(key: string): any {
   try {
     const itemStr = localStorage.getItem(key)
-    // if the item doesn't exist, return null
     if (!itemStr) {
       return null
     }
     const item = JSON.parse(itemStr)
     const now = new Date()
-    // compare the expiry time of the item with the current time
     if (now.getTime() > item.expiry) {
-      // If the item is expired, delete the item from storage
-      // and return null
       localStorage.removeItem(key)
       return null
     }
@@ -51,11 +45,8 @@ function getLocalStorageItemWithExpiry(key) {
   }
 }
 
-export const fetchDataWithCache = async (url, cache) => {
+export const fetchDataWithCache = async (url: string, cache?: { key: string; ttl: number }): Promise<any> => {
   const { key, ttl } = cache || {}
-  //Here I want that API response get cached till midnight
-  //Want to keep it consistent with 7/135 behaviour of entity caching.
-  //Will use localStorage
   try {
     const cachedResponse = getLocalStorageItemWithExpiry(key)
     if (cachedResponse) {

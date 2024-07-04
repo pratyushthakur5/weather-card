@@ -1,10 +1,11 @@
+import React, { FC } from 'react'
 import { Inter } from 'next/font/google'
 import HomepageBg from '@/assets/coverBg.png'
 import Link from 'next/link'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter: Inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+const Home: FC = () => {
   return (
     <>
       <div className={`${inter.className}`} id='main-container'>
@@ -21,3 +22,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

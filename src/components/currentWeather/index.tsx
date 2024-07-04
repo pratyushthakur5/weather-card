@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import WeatherCard from '@/components/card/index'
 import './index.scss'
 
-const CurrentWeather = () => {
+const CurrentWeather: FC = () => {
   return (
     <div className='current-weather-container'>
       <WeatherCard></WeatherCard>
