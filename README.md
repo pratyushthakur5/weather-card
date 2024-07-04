@@ -30,9 +30,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Features
 
-Features implemented:
-Current weather card: Search for any city and get its weather
-Temperature Toggle: Ability to toggle between Celsius/Fahrenheit
+Features implemented: <br>
 
-Optimisation: API caching(prevents unecessary hits),
+Current weather card: Search for any city and get its weather <br>
+
+Temperature Toggle: Ability to toggle between Celsius/Fahrenheit <br>
+
+Optimisation: API caching(prevents unecessary hits)<br>
+
 Debounced Search: Searches automatically after a delay, pauses till input is continously active.
